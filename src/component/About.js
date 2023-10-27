@@ -1,37 +1,85 @@
-import React from 'react'
-
+import './ab/App.css';
+import gptLogo from './ab/law.svg';
+import msgIcon from './ab/message.svg';
+import sendBtn from './ab/send.svg'
+import userIcon from './ab/user-icon.png'
+import gptImgLogo from './ab/cd.jpg'
+import {sendMsgToOpenAI} from './ab/openai'
+import {useState} from 'react'
 function About() {
+const[input,setInput] =useState("");
+const[messages,setMessages]=useState([
+  {
+  text:"Hi I am a Legal-Bot designed by Divyanshu Singh!!",
+  isBot:true,
+}
+]);
+
+  const handleSend= async () => {
+
+    const text=input+" If it is not related to law or crime then dont reply";
+    setInput('');
+    setMessages([
+      ...messages,
+      { text,isBot:false}
+      
+    ])
+    const res =await sendMsgToOpenAI(text)
+    setMessages([
+      ...messages,
+      {text, isBot:false},
+      {
+        text:res,isBot:true
+      }
+    ])
+  }
   return (
-    <div class="flex flex-col justify-between max-w-xl px-4 mx-auto lg:pt-16 lg:flex-row md:px-8 lg:max-w-screen-xl">
-  <div class="pt-16 mb-16 lg:mb-0 lg:pt-32 lg:max-w-lg lg:pr-5">
-    <div class="max-w-xl mb-6">
-      <div>
-        <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-          About
-        </p>
+    <div className="About">
+      <div className="sideBar">
+        <div className="upperSide">
+          <div className="upperSideTop"><img src={gptLogo} alt="Logo" className="logo" /><span className="brand">Legal ChatBot</span></div>
+          <button className="midBtn">Instructions</button>
+          
+          <div className="upperSideBottom">
+            <button className="query">You can ask questions about criminal law, legal procedures, legal definitions, or seek general legal advice.Please provide details about your legal issue for a more accurate response.
+</button>
+            <button className="query">Your privacy is important. Please do not share personal details or confidential information.Please note that legal advice may differ depending on your jurisdiction. Specify your location if relevant.
+</button>
+<button className="query">You can ask questions about criminal law, legal procedures, legal definitions, or seek general legal advice.Please provide details about your legal issue for a more accurate response.
+In case of emergencies or specific legal issues, please contact local authorities or consult with an attorney.
+
+</button>
+          </div>
+          </div>
+          
+        
+        <div className="lowerSide">
+
+        </div>
       </div>
-      <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-        About US
-      </h2>
-      <p class="text-base text-gray-700 md:text-lg">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae. explicabo.
-      </p>
-    </div>
-    <div class="flex items-center">
-      <a
-        href="/"
-        class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-      >
-        Get started
-      </a>
-      <a href="/" aria-label="" class="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800">Learn more</a>
-    </div>
-  </div>
-  <div>
-    <img src="https://kitwind.io/assets/kometa/two-thirds-phone.png" class="object-cover object-top w-full h-64 mx-auto lg:h-auto xl:mr-24 md:max-w-sm" alt="" />
-  </div>
+      <div className="main">
+      <div className="chats">
+  {messages.map((message, i) => {
+    const messageText = message.isBot ? message.text : message.text.slice(0, -52); // Remove the last 10 characters if isBot is false
+
+    return (
+      <div key={i} className={message.isBot ? "chat bot" : "chat"}>
+        <img className="chatImg" src={message.isBot ? gptImgLogo : userIcon} alt="" />
+        <p className="txt">{messageText}</p>
+      </div>
+    );
+  })}
 </div>
-  )
+
+        <div className="chatFooter">
+          <div className="inp">
+            <input type="text" placeholder="Send a message" value={input} onChange={(e)=>{setInput(e.target.value)}}/> <button className="send" onClick={handleSend}><img src={sendBtn} alt="Send" /></button>
+          </div>
+          <p>Only provide Information related to Indian Law</p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default About
+export default About;
