@@ -5,7 +5,7 @@ const Home = () => {
     <section className="relative bg-blue-100 h-screen">
       {/* Video Background */}
       <video autoPlay muted loop id="video-background" className="absolute w-full h-full object-cover">
-        <source src={require('C:/integrations-3/React-Routing/src/assets/Law.mp4')} type="video/mp4" />
+        <source src={require('./assets/Law.mp4')} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
