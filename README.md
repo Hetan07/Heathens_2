@@ -57,3 +57,7 @@ Here are some of the key technologies and libraries used in our project:
 - Python
 - Hugging Face Transformers
 - OpenAI API
+
+----
+
+One can specifically run the huggingface built model locally by running the app.py locally. This uses the streamlit services along with OpenAI API. 
