@@ -61,3 +61,10 @@ Here are some of the key technologies and libraries used in our project:
 ----
 
 One can specifically run the huggingface built model locally by running the app.py locally. This uses the streamlit services along with OpenAI API. 
+
+----
+Made and created By Team Heathens:
+Contributors:
+HETANSHU MALIK
+SHIVANSHU VERMA
+
