@@ -65,6 +65,7 @@ One can specifically run the huggingface built model locally by running the app.
 ----
 Made and created By Team Heathens:
 Contributors:
-HETANSHU MALIK
-SHIVANSHU VERMA
+HETANSHU MALIK (Leader)
+DIVYANSHU SINGH
+SHIVANSHU VERMA 
 
